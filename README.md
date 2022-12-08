@@ -22,8 +22,6 @@ pip -m install rabe-cridlib
 >>>
 >>> # parse an existing crid
 >>> crid = cridlib.parse("crid://rabe.ch/v1/klangbecken#t=clock=19930301T131200.00Z")
->>> print(crid)
-crid://rabe.ch/v1/klangbecken#t=clock=19930301T131200.00Z
 >>> print(f"version: {crid.version}, show: {crid.show}, start: {crid.start}")
 version: v1, show: klangbecken, start: 1993-03-01 13:12:00
 

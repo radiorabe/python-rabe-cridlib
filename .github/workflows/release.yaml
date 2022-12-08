@@ -21,6 +21,8 @@ jobs:
           python-version: '3.x'
           cache: 'poetry'
 
+      - run: pip install poetry_dynamic_versioning
+
       - run: poetry install
 
       - run: poetry build

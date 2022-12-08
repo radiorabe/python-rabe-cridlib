@@ -1,10 +1,13 @@
 [tool.poetry]
-name = "cridlib"
+name = "rabe-cridlib"
 version = "0.0.0"
 description = "Generate CRIDs for RaBe"
 authors = ["Lucas Bickel <hairmare@rabe.ch>"]
 readme = "README.md"
 license = "AGPL-3"
+packages = [
+    { include = "cridlib"},
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"

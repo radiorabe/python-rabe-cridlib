@@ -24,6 +24,10 @@ jobs:
 
       - run: poetry install
 
+      - name: Configure poetry
+        run: poetry config pypi-token.pypi ${{ secrets.RABE_PYPI_TOKEN }}
+        if: ${{ github.event_name != 'pull_request' }}
+
       - name: Set dry-run flag
         id: dry-run
         run: |
@@ -36,7 +40,4 @@ jobs:
 
       - run: poetry version $(git describe --tags --abbrev=0 --exact-match || (git describe --tags --abbrev=0 --dirty=+dev|tr -d '\n'; echo "+dev"))
 
-      - run: poetry publish --build ${{ steps.dry-run.outputs.flag }}
-        env:
-          USERNAME: __token__
-          PASSWORD: ${{ secrets.RABE_PYPI_TOKEN }}
+      - run: poetry publish --build --no-interaction ${{ steps.dry-run.outputs.flag }}

@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "cridlib"
+version = "0.0.0"
+description = "Generate CRIDs for RaBe"
+authors = ["Lucas Bickel <hairmare@rabe.ch>"]
+readme = "README.md"
+license = "AGPL-3"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "^2.28.1"
+uri = {git = "https://github.com/marrow/uri.git", rev = "develop"}
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.2.0"
+pytest-cov = "^4.0.0"
+wheel = "^0.38.4"
+types-requests = "^2.28.11"
+twine = "^4.0.2"
+flake8 = "^6.0.0"
+flake8-docstrings = "^1.6.0"
+flake8-string-format = "^0.3.0"
+flake8-tuple = "^0.4.1"
+freezegun = "^1.2.2"
+requests-mock = "^1.10.0"
+black = "^22.10.0"
+isort = "^5.10.1"
+Markdown = "^3.4.1"
+pytest-mypy = "^0.10.2"
+pytest-pylint = "^0.19.0"
+pytest-random-order = "^1.1.0"
+types-pytz = "^2022.6.0"
+pytz = ">=2022.6"
+poetry-dynamic-versioning = {extras = ["plugin"], version = "^0.21.1"}
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+dirty = true
+
+[tool.pytest.ini_options]
+minversion = "7.2"
+addopts = "-ra -q --random-order --doctest-glob='*.md' --doctest-modules --cov=cridlib --cov-fail-under=100 --pylint --mypy"

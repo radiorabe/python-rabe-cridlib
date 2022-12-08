@@ -9,7 +9,6 @@ import cridlib
 
 def test_get(klangbecken_mock, archiv_mock):  # pylint: disable=unused-argument
     """Test get."""
-    cridlib.setup()
 
     # current show
     crid = cridlib.get()

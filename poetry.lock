@@ -1110,23 +1110,12 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
-name = "uri"
-version = "3.0.0"
-description = "A type to represent, query, and manipulate a Uniform Resource Identifier."
+name = "uritools"
+version = "4.0.0"
+description = "URI parsing, classification and composition"
 category = "main"
 optional = false
-python-versions = ">=3.8"
-develop = false
-
-[package.extras]
-development = ["bandit", "e", "markupsafe", "mypy", "pre-commit", "ptipython", "pytest", "pytest-cov", "pytest-flakes", "pytest-isort", "rope", "webob"]
-http = ["requests"]
-
-[package.source]
-type = "git"
-url = "https://github.com/marrow/uri.git"
-reference = "develop"
-resolved_reference = "74960dd59c64e8ffcb864e5b742b2495340711e1"
+python-versions = "~=3.7"
 
 [[package]]
 name = "urllib3"
@@ -1211,7 +1200,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "6b70dbcd6022d492cbb9cb97623d6d593060d6ec3720fab867d26bb3e6907fb3"
+content-hash = "94f7a01f946e3bcd0fe1d610057dccca3ba8ded8986806a412c9d9c230ec4850"
 
 [metadata.files]
 astroid = [
@@ -1949,7 +1938,10 @@ typing-extensions = [
     {file = "typing_extensions-4.4.0-py3-none-any.whl", hash = "sha256:16fa4864408f655d35ec496218b85f79b3437c829e93320c7c9215ccfd92489e"},
     {file = "typing_extensions-4.4.0.tar.gz", hash = "sha256:1511434bb92bf8dd198c12b1cc812e800d4181cfcb867674e0f8279cc93087aa"},
 ]
-uri = []
+uritools = [
+    {file = "uritools-4.0.0-py3-none-any.whl", hash = "sha256:9a5a1495c55072093216f79931ca45fd81b59208aa64caae50ab68333514f97e"},
+    {file = "uritools-4.0.0.tar.gz", hash = "sha256:420d94c1ff4bf90c678fca9c17b8314243bbcaa992c400a95e327f7f622e1edf"},
+]
 urllib3 = [
     {file = "urllib3-1.26.13-py2.py3-none-any.whl", hash = "sha256:47cc05d99aaa09c9e72ed5809b60e7ba354e64b59c9c173ac3018642d8bb41fc"},
     {file = "urllib3-1.26.13.tar.gz", hash = "sha256:c083dd0dce68dbfbe1129d5271cb90f9447dea7d52097c6e0126120c521ddea8"},

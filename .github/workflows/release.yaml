@@ -1,6 +1,7 @@
 name: Release
 
 on:
+  pull_request:
   release:
     types: [created]
 
@@ -21,15 +22,21 @@ jobs:
           python-version: '3.x'
           cache: 'poetry'
 
-      - run: pip install poetry_dynamic_versioning
-
       - run: poetry install
 
-      - run: poetry build
+      - name: Set dry-run flag
+        id: dry-run
+        run: |
+          flag="--dry-run"
+          if ${{ github.event_name != 'pull_request' }}
+          then
+            flag=""
+          fi
+          echo "flag=$flag" >> $GITHUB_OUTPUT
 
-      - name: Run twine
+      - run: poetry version $(git describe --tags --abbrev=0 --exact-match || (git describe --tags --abbrev=0 --dirty=+dev|tr -d '\n'; echo "+dev"))
+
+      - run: poetry publish --build ${{ steps.dry-run.outputs.flag }}
         env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.RABE_PYPI_TOKEN }}
-          TWINE_NON_INTERACTIVE: true
-        run: poetry run twine upload dist/*
+          USERNAME: __token__
+          PASSWORD: ${{ secrets.RABE_PYPI_TOKEN }}

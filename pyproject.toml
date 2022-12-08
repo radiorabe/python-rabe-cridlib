@@ -10,13 +10,13 @@ license = "AGPL-3"
 python = "^3.9"
 requests = "^2.28.1"
 uritools = "^4.0.0"
+pytz = ">=2022.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.2.0"
 pytest-cov = "^4.0.0"
 wheel = "^0.38.4"
 types-requests = "^2.28.11"
-twine = "^4.0.2"
 flake8 = "^6.0.0"
 flake8-docstrings = "^1.6.0"
 flake8-string-format = "^0.3.0"
@@ -30,15 +30,10 @@ pytest-mypy = "^0.10.2"
 pytest-pylint = "^0.19.0"
 pytest-random-order = "^1.1.0"
 types-pytz = "^2022.6.0"
-pytz = ">=2022.6"
 
 [build-system]
-requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
-build-backend = "poetry_dynamic_versioning.backend"
-
-[tool.poetry-dynamic-versioning]
-enable = true
-dirty = true
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 minversion = "7.2"

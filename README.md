@@ -20,10 +20,6 @@ pip -m install rabe-cridlib
 ```python
 >>> import cridlib
 >>>
->>> # get rabe-cridlib version
->>> print(f"version: {cridlib.__version__}")
-version: 0.0.0
-
 >>> # parse an existing crid
 >>> crid = cridlib.parse("crid://rabe.ch/v1/klangbecken#t=clock=19930301T131200.00Z")
 >>> print(crid)
@@ -83,7 +79,7 @@ If a commit does not contain a conventional commit style message you can fix
 it during the squash and merge operation on the PR.
 
 Once a commit has landed on the `main` branch a release will be created and automatically published to [pypi](https://pypi.org/)
-using the GitHub Action in [.github/workflows/release.yaml](./.github/workflows/release.yaml) which uses [twine](https://twine.readthedocs.io/)
+using the GitHub Action in [.github/workflows/release.yaml](./.github/workflows/release.yaml) which uses [poetry](https://python-poetry.org/)
 to publish the package to pypi.
 
 ## License

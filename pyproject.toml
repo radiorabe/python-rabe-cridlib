@@ -1,10 +1,17 @@
 [tool.poetry]
 name = "rabe-cridlib"
-version = "0.0.0"
+version = "0.0.0" # 0.0.0 placeholder is replaced on release
 description = "Generate CRIDs for RaBe"
-authors = ["Lucas Bickel <hairmare@rabe.ch>"]
-readme = "README.md"
+repository = "https://github.com/radiorabe/python-rabe-cridlib"
+authors = ["RaBe IT-Reaktion <it@rabe.ch>"]
 license = "AGPL-3"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Multimedia :: Sound/Audio :: Conversion",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+readme = "README.md"
 packages = [
     { include = "cridlib"},
 ]
@@ -34,11 +41,15 @@ pytest-pylint = "^0.19.0"
 pytest-random-order = "^1.1.0"
 types-pytz = "^2022.6.0"
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.isort]
+line_length = 120
+profile = "black"
 
 [tool.pytest.ini_options]
 minversion = "7.2"
 addopts = "-ra -q --random-order --doctest-glob='*.md' --doctest-modules --cov=cridlib --cov-fail-under=100 --pylint --mypy"
 filterwarnings = ["ignore::pytest.PytestRemovedIn8Warning:pytest_pylint"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

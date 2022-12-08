@@ -44,3 +44,4 @@ dirty = true
 [tool.pytest.ini_options]
 minversion = "7.2"
 addopts = "-ra -q --random-order --doctest-glob='*.md' --doctest-modules --cov=cridlib --cov-fail-under=100 --pylint --mypy"
+filterwarnings = ["ignore::pytest.PytestRemovedIn8Warning:pytest_pylint"]

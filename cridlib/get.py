@@ -6,7 +6,7 @@ from .lib import CRID
 from .strategy import future, now, past
 
 
-def get(timestamp: datetime | None = None) -> CRID:
+def get(timestamp=None) -> CRID:
     """Get a RaBe CRID."""
     _now = datetime.now()
     _ts = timestamp or _now

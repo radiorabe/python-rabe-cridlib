@@ -1,9 +1,10 @@
 """Low-level cridlib implemenetation bits."""
 
 from datetime import datetime
+from pathlib import PurePath
 from urllib.parse import parse_qs
 
-import uri  # type: ignore
+from uritools import uricompose, urisplit  # type: ignore
 
 
 class CRIDError(Exception):
@@ -14,7 +15,7 @@ class CRIDSchemeMismatchError(CRIDError):
     """Scheme in URI does not match 'crid'."""
 
 
-class CRIDSchemeHostMismatchError(CRIDError):
+class CRIDSchemeAuthorityMismatchError(CRIDError):
     """Hostname part of URI does not match 'rabe.ch'."""
 
 
@@ -30,18 +31,16 @@ class CRIDMalformedMediaFragmentError(CRIDError):
     """Missing media-fragment with clock code."""
 
 
-class CRID(uri.URI):
+class CRID:
     """Represent CRIDs using uri."""
 
-    def __init__(
-        self, _uri: uri.typing.Optional[uri.typing.URILike] = None, **parts
-    ) -> None:
-        super().__init__(_uri, **parts)
+    def __init__(self, _uri=None) -> None:
+        self._uri = urisplit(_uri)
         if self.scheme != "crid":
             raise CRIDSchemeMismatchError(self.scheme)
-        if self.host != "rabe.ch":
-            raise CRIDSchemeHostMismatchError(self.host)
-        if not self.path.match("/v1/*"):
+        if self.authority != "rabe.ch":
+            raise CRIDSchemeAuthorityMismatchError(self.authority)
+        if self.path.parent.stem != "v1":
             raise CRIDUnsupportedVersionError(self.path)
         self._version = self.path.parent.stem
         self._show = self.path.relative_to(self.path.parent).stem
@@ -54,6 +53,32 @@ class CRID(uri.URI):
             raise CRIDMissingMediaFragmentError(self.fragment) from ex
         except ValueError as ex:  # pragma: no cover
             raise CRIDMalformedMediaFragmentError(self.fragment) from ex
+
+    def __str__(self):
+        return uricompose(*self._uri)
+
+    def __repr__(self):  # pragma: no cover
+        return f"{self.__class__}: {str(self)}"
+
+    @property
+    def scheme(self):
+        """Get RaBe CRID scheme."""
+        return self._uri.scheme
+
+    @property
+    def authority(self):
+        """Get RaBe CRID authority."""
+        return self._uri.authority
+
+    @property
+    def path(self):
+        """Get RaBe CRID path."""
+        return PurePath(self._uri.path)
+
+    @property
+    def fragment(self):
+        """Get RaBe CRID fragment."""
+        return self._uri.fragment
 
     @property
     def version(self):
@@ -69,8 +94,3 @@ class CRID(uri.URI):
     def start(self):
         """Get RaBe CRID start time."""
         return self._start
-
-
-def setup():
-    """Setup RaBe cridlib."""
-    uri.part.scheme.SchemePart.registry["crid"] = uri.scheme.URLScheme("crid")

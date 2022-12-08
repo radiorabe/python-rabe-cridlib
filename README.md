@@ -20,9 +20,6 @@ pip -m install rabe-cridlib
 ```python
 >>> import cridlib
 >>>
->>> # register the crid scheme
->>> cridlib.setup()
->>>
 >>> # get rabe-cridlib version
 >>> print(f"version: {cridlib.__version__}")
 version: 0.0.0

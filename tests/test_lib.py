@@ -2,33 +2,64 @@
 from datetime import datetime
 
 from freezegun import freeze_time
-from pytest import raises
+from pytest import mark, raises
 
 import cridlib
 
 
-def test_crid():
-    """Test CRID class."""
-    # basic minimal roundtrip
+@mark.parametrize(
+    "crid_str,expected",
+    [
+        (
+            "crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z",
+            {
+                "version": "v1",
+                "show": "test",
+                "start": datetime(1993, 3, 1, 13, 12),
+            },
+        ),
+        (
+            "crid://rabe.ch/v1",
+            {
+                "version": "v1",
+                "show": None,
+                "start": None,
+            },
+        ),
+        (
+            "crid://rabe.ch/v1#t=clock=19930301T131200.00Z",
+            {
+                "version": "v1",
+                "show": None,
+                "start": datetime(1993, 3, 1, 13, 12),
+            },
+        ),
+    ],
+)
+def test_crid_roundtrip(crid_str, expected):
     with freeze_time("1993-03-01 13:12"):
-        crid = cridlib.lib.CRID("crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z")
-    assert str(crid) == "crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z"
-    assert crid.version == "v1"
-    assert crid.show == "test"
-    assert crid.start == datetime(1993, 3, 1, 13, 12)
+        crid = cridlib.lib.CRID(crid_str)
+    assert str(crid) == crid_str
+    assert crid.version == expected["version"]
+    assert crid.show == expected["show"]
+    assert crid.start == expected["start"]
 
-    # test for scheme mismatch
+
+def test_crid_scheme_mismatch():
     with raises(cridlib.lib.CRIDSchemeMismatchError):
         cridlib.lib.CRID("https://rabe.ch/v1/test")
 
-    # test for hostname mismatch
+
+def test_crid_hostname_mismatch():
     with raises(cridlib.lib.CRIDSchemeAuthorityMismatchError):
         cridlib.lib.CRID("crid://example.org/v1/test")
 
-    # test for version mismatch
+
+def test_crid_version_mismatch():
     with raises(cridlib.lib.CRIDUnsupportedVersionError):
         cridlib.lib.CRID("crid://rabe.ch/vX/test")
 
-    # test for lack of fragments
+
+def test_crid_missing_media_fragment():
     with raises(cridlib.lib.CRIDMissingMediaFragmentError):
-        cridlib.lib.CRID("crid://rabe.ch/v1/test")
+        cridlib.lib.CRID("crid://rabe.ch/v1/test#t=wrong=10")

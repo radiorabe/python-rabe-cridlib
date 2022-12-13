@@ -57,8 +57,15 @@ class CRID:
     def __str__(self):
         return uricompose(*self._uri)
 
-    def __repr__(self):  # pragma: no cover
-        return f"{self.__class__}: {str(self)}"
+    def __repr__(self) -> str:
+        """Pretty print CRID.
+
+        >>> CRID("crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z")
+        <class 'cridlib.lib.CRID' for 'crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z'>
+
+        """
+        _fqcn = f"{self.__class__.__module__}.{self.__class__.__qualname__}"
+        return f"<class '{_fqcn}' for '{str(self)}'>"
 
     @property
     def scheme(self):

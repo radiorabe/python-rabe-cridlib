@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from pathlib import PurePath
+from typing import Optional
 from urllib.parse import parse_qs
 
 from uritools import uricompose, urisplit  # type: ignore
@@ -38,24 +39,32 @@ class CRID:
     """Represent CRIDs using uri."""
 
     def __init__(self, _uri=None) -> None:
+        self._show: Optional[str] = None
+        self._start: Optional[datetime] = None
+
         self._uri = urisplit(_uri)
         if self.scheme != "crid":
             raise CRIDSchemeMismatchError(self.scheme)
         if self.authority != "rabe.ch":
             raise CRIDSchemeAuthorityMismatchError(self.authority)
-        if self.path.parent.stem != "v1":
+        # parent.stem contains version in /v1/foo paths, stem in generic root /v1 path
+        if self.path.parent.stem != "v1" and self.path.stem != "v1":
             raise CRIDUnsupportedVersionError(self.path)
-        self._version = self.path.parent.stem
-        self._show = self.path.relative_to(self.path.parent).stem
-        try:
-            self._start = datetime.strptime(
-                parse_qs(parse_qs(self.fragment)["t"][0])["clock"][0],
-                "%Y%m%dT%H%M%S.%fZ",
-            )
-        except KeyError as ex:
-            raise CRIDMissingMediaFragmentError(self.fragment) from ex
-        except ValueError as ex:  # pragma: no cover
-            raise CRIDMalformedMediaFragmentError(self.fragment) from ex
+        self._version = self.path.parent.stem or self.path.stem
+        # only store show if we have one
+        if self.path.stem != "v1":
+            self._show = self.path.relative_to(self.path.parent).stem
+        # fragments are optional, but if provided we want them to contain t=code
+        if self.fragment:
+            try:
+                self._start = datetime.strptime(
+                    parse_qs(parse_qs(self.fragment)["t"][0])["clock"][0],
+                    "%Y%m%dT%H%M%S.%fZ",
+                )
+            except KeyError as ex:
+                raise CRIDMissingMediaFragmentError(self.fragment) from ex
+            except ValueError as ex:  # pragma: no cover
+                raise CRIDMalformedMediaFragmentError(self.fragment) from ex
 
     def __str__(self) -> str:
         return uricompose(*self._uri)
@@ -96,11 +105,11 @@ class CRID:
         return self._version
 
     @property
-    def show(self) -> str:
+    def show(self) -> Optional[str]:
         """Get RaBe CRID show."""
         return self._show
 
     @property
-    def start(self) -> datetime:
+    def start(self) -> Optional[datetime]:
         """Get RaBe CRID start time."""
         return self._start

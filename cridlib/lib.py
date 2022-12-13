@@ -31,6 +31,9 @@ class CRIDMalformedMediaFragmentError(CRIDError):
     """Missing media-fragment with clock code."""
 
 
+CRIDPath = PurePath
+
+
 class CRID:
     """Represent CRIDs using uri."""
 
@@ -54,7 +57,7 @@ class CRID:
         except ValueError as ex:  # pragma: no cover
             raise CRIDMalformedMediaFragmentError(self.fragment) from ex
 
-    def __str__(self):
+    def __str__(self) -> str:
         return uricompose(*self._uri)
 
     def __repr__(self) -> str:
@@ -68,36 +71,36 @@ class CRID:
         return f"<class '{_fqcn}' for '{str(self)}'>"
 
     @property
-    def scheme(self):
+    def scheme(self) -> str:
         """Get RaBe CRID scheme."""
         return self._uri.scheme
 
     @property
-    def authority(self):
+    def authority(self) -> str:
         """Get RaBe CRID authority."""
         return self._uri.authority
 
     @property
-    def path(self):
+    def path(self) -> CRIDPath:
         """Get RaBe CRID path."""
-        return PurePath(self._uri.path)
+        return CRIDPath(self._uri.path)
 
     @property
-    def fragment(self):
+    def fragment(self) -> str:
         """Get RaBe CRID fragment."""
         return self._uri.fragment
 
     @property
-    def version(self):
+    def version(self) -> str:
         """Get RaBe CRID version."""
         return self._version
 
     @property
-    def show(self):
+    def show(self) -> str:
         """Get RaBe CRID show."""
         return self._show
 
     @property
-    def start(self):
+    def start(self) -> datetime:
         """Get RaBe CRID start time."""
         return self._start

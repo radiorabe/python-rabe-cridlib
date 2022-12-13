@@ -27,7 +27,7 @@ version: v1, show: klangbecken, start: 1993-03-01 13:12:00
 
 >>> # get crid for current show
 >>> crid = cridlib.get()
->>> print(f"version: {crid.version}, show: crid.show")  # doctest:+ELLIPSIS
+>>> print(f"version: {crid.version}, show: {crid.show}")  # doctest:+ELLIPSIS
 version: v1, show: ...
 
 ```

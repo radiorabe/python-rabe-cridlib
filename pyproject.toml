@@ -48,7 +48,10 @@ profile = "black"
 [tool.pytest.ini_options]
 minversion = "7.2"
 addopts = "-ra -q --random-order --doctest-glob='*.md' --doctest-modules --cov=cridlib --cov-fail-under=100 --pylint --mypy"
-filterwarnings = ["ignore::pytest.PytestRemovedIn8Warning:pytest_pylint"]
+filterwarnings = [
+    "ignore::pytest.PytestRemovedIn8Warning:pytest_pylint",
+    "ignore::DeprecationWarning:pylint"
+]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

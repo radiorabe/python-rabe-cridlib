@@ -6,7 +6,7 @@ from .lib import CRID
 from .strategy import future, now, past
 
 
-def get(timestamp=None) -> CRID:
+def get(timestamp=None, fragment="") -> CRID:
     """Get a RaBe CRID.
 
     If you need to get the CRID for a specific point in RaBe time using a human-readable timezone:
@@ -28,5 +28,7 @@ def get(timestamp=None) -> CRID:
     elif _ts > _now:  # pragma: no cover
         _show = future.get_show(future=_ts)
 
-    _tscode = f"{_ts.strftime('%Y%m%dT%H%M%S.%f')[:-4]}Z"
-    return CRID(f"crid://rabe.ch/v1/{_show}#t=clock={_tscode}")
+    _tscode = f"t=clock={_ts.strftime('%Y%m%dT%H%M%S.%f')[:-4]}Z"
+    _fragment = f"{_tscode}{'&' + fragment if fragment else ''}"
+
+    return CRID(f"crid://rabe.ch/v1/{_show}#{_fragment}")

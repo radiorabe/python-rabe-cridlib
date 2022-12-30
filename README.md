@@ -4,7 +4,7 @@ Generate [RaBe CRIDs](https://github.com/radiorabe/crid-spec) based on several d
 
 * Songticker for current CRID
 * `archiv.rabe.ch` for past CRIDs
-* TBD: LibreTime for future CRIDs
+* LibreTime for future CRIDs (currently only data for the next 7 days and only available internally at RaBe)
 
 ## Installation
 

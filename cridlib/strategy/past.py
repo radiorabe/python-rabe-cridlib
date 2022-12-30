@@ -4,13 +4,13 @@ from datetime import datetime
 
 import requests
 
-from cridlib.const import ARCHIV_BROADCASTS_URL
+__ARCHIV_BROADCASTS_URL = "https://archiv.rabe.ch/api/broadcasts/"
 
 
 def get_show(past: datetime) -> str:
     """Return the a show slug from a past show."""
 
-    _url = f"{ARCHIV_BROADCASTS_URL}{past.year}/{past.month:02d}/{past.day:02d}/{past.hour:02d}{past.minute:02d}{past.second:02d}"  # pylint: disable=line-too-long
+    _url = f"{__ARCHIV_BROADCASTS_URL}{past.year}/{past.month:02d}/{past.day:02d}/{past.hour:02d}{past.minute:02d}{past.second:02d}"  # pylint: disable=line-too-long
     _resp = requests.get(_url, timeout=10)
     _json = _resp.json()
     _data = _json.get("data")

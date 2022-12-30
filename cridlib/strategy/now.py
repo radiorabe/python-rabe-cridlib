@@ -6,13 +6,13 @@ from pathlib import PurePath
 import requests
 from uritools import urisplit  # type: ignore
 
-from cridlib.const import SONGTICKER_URL
+__SONGTICKER_URL = "https://songticker.rabe.ch/songticker/0.9.3/current.xml"
 
 
 def get_show() -> str:
     """Return the currently running shows slug from nowplaying."""
 
-    _resp = requests.get(SONGTICKER_URL, timeout=10)
+    _resp = requests.get(__SONGTICKER_URL, timeout=10)
     _tree = ET.fromstring(_resp.text)
     _path = PurePath(urisplit(_tree[3][1].text).path)
     return _path.stem

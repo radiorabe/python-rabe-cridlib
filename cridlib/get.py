@@ -31,4 +31,4 @@ def get(timestamp=None, fragment="") -> CRID:
     _tscode = f"t=clock={_ts.strftime('%Y%m%dT%H%M%S.%f')[:-4]}Z"
     _fragment = f"{_tscode}{'&' + fragment if fragment else ''}"
 
-    return CRID(f"crid://rabe.ch/v1/{_show}#{_fragment}")
+    return CRID(f"crid://rabe.ch/v1{'/' + _show if _show else ''}#{_fragment}")

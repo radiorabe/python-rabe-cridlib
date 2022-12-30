@@ -39,3 +39,55 @@ def fixture_archiv_mock(requests_mock):
         "https://archiv.rabe.ch/api/broadcasts/1993/03/01/131200",
         json={"data": [{"attributes": {"label": "test"}}]},
     )
+
+
+@fixture(name="libretime_mock")
+def fixture_libretime_mock(requests_mock):
+    return requests_mock.get(
+        "https://airtime.service.int.rabe.ch/api/live-info-v2/format/json",
+        json={
+            "station": {
+                "timezone": "UTC",
+            },
+            "shows": {
+                "next": [
+                    {
+                        "name": "Klangbecken",
+                        "description": "",
+                        "genre": "",
+                        "id": 1,
+                        "instance_id": 1,
+                        "record": 0,
+                        "url": "https://rabe.ch/klangbecken",
+                        "image_path": "",
+                        "starts": "1993-03-01 00:00:00",
+                        "ends": "1993-03-01 08:00:00",
+                    },
+                    {
+                        "name": "Der Morgen",
+                        "description": "",
+                        "genre": "",
+                        "id": 2,
+                        "instance_id": 2,
+                        "record": 0,
+                        "url": "https://rabe.ch/der-morgen",
+                        "image_path": "",
+                        "starts": "1993-03-01 08:00:00",
+                        "ends": "1993-03-01 11:00:00",
+                    },
+                    {
+                        "name": "Info",
+                        "description": "",
+                        "genre": "",
+                        "id": 3,
+                        "instance_id": 3,
+                        "record": 0,
+                        "url": "https://rabe.ch/info",
+                        "image_path": "",
+                        "starts": "1993-03-01 11:00:00",
+                        "ends": "1993-03-01 11:30:00",
+                    },
+                ]
+            },
+        },
+    )

@@ -600,7 +600,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "uritools"
-version = "4.0.0"
+version = "4.0.1"
 description = "URI parsing, classification and composition"
 category = "main"
 optional = false
@@ -653,7 +653,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "488f1b970f10ea64febc7c4acf4491bd0c5251dd8ab10ca2dd05e5ca9325a063"
+content-hash = "e1341e236a969c18f3376fe4978ea7f5148eeeea7eb3e423861ed9ca9fbf377d"
 
 [metadata.files]
 astroid = [
@@ -964,8 +964,8 @@ typing-extensions = [
     {file = "typing_extensions-4.4.0.tar.gz", hash = "sha256:1511434bb92bf8dd198c12b1cc812e800d4181cfcb867674e0f8279cc93087aa"},
 ]
 uritools = [
-    {file = "uritools-4.0.0-py3-none-any.whl", hash = "sha256:9a5a1495c55072093216f79931ca45fd81b59208aa64caae50ab68333514f97e"},
-    {file = "uritools-4.0.0.tar.gz", hash = "sha256:420d94c1ff4bf90c678fca9c17b8314243bbcaa992c400a95e327f7f622e1edf"},
+    {file = "uritools-4.0.1-py3-none-any.whl", hash = "sha256:d122d394ed6e6e15ac0fddba6a5b19e9fa204e7797507815cbfb0e1455ac0475"},
+    {file = "uritools-4.0.1.tar.gz", hash = "sha256:efc5c3a6de05404850685a8d3f34da8476b56aa3516fbf8eff5c8704c7a2826f"},
 ]
 urllib3 = [
     {file = "urllib3-1.26.13-py2.py3-none-any.whl", hash = "sha256:47cc05d99aaa09c9e72ed5809b60e7ba354e64b59c9c173ac3018642d8bb41fc"},

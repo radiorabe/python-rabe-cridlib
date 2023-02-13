@@ -35,18 +35,22 @@ freezegun = "^1.2.2"
 requests-mock = "^1.10.0"
 black = "^22.12.0"
 isort = "^5.11.4"
-Markdown = "^3.4.1"
+Markdown = "^3.3"
 pytest-mypy = "^0.10.3"
 pytest-pylint = "^0.19.0"
 pytest-random-order = "^1.1.0"
 types-pytz = "^2022.7.0"
+mkdocstrings = {extras = ["python"], version = "^0.20.0"}
+mkdocs-material = "^9.0.12"
+mkdocs = "^1.4.2"
+mkdocs-gen-files = "^0.4.0"
+mkdocs-literate-nav = "^0.6.0"
+mkdocs-section-index = "^0.3.5"
+pytest-pycodestyle = "^2.3.1"
 
 [tool.isort]
 line_length = 120
 profile = "black"
-
-[tool.pylint.format]
-max-line-lenth = 120
 
 [tool.pylint.messages_control]
 # C0114 = missing-module-docstring
@@ -55,10 +59,11 @@ disable = ["C0114","C0116"]
 
 [tool.pytest.ini_options]
 minversion = "7.2"
-addopts = "-ra -q --random-order --doctest-glob='*.md' --doctest-modules --cov=cridlib --cov-fail-under=100 --pylint --mypy"
+addopts = "-ra -q --random-order --doctest-glob='*.md' --doctest-modules --cov=cridlib --cov-fail-under=100 --pylint --ignore=docs/ --mypy"
 filterwarnings = [
     "ignore::pytest.PytestRemovedIn8Warning:pytest_pylint",
-    "ignore::DeprecationWarning:pylint"
+    "ignore::DeprecationWarning:pylint",
+    "ignore::DeprecationWarning:pytest_pylint",
 ]
 
 [build-system]

@@ -7,7 +7,6 @@ theme:
   icon:
     repo: fontawesome/brands/git-alt
   features:
-    - content.action.edit
     - content.code.copy
 
 markdown_extensions:

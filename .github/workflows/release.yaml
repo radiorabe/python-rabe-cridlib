@@ -28,13 +28,13 @@ jobs:
 
       - name: Configure poetry
         run: poetry config pypi-token.pypi ${{ secrets.RABE_PYPI_TOKEN }}
-        if: ${{ github.event_name != 'pull_request' and github.event_name != 'push' }}
+        if: ${{ github.event_name != 'pull_request' && github.event_name != 'push' }}
 
       - name: Set dry-run flag
         id: dry-run
         run: |
           flag="--dry-run"
-          if ${{ github.event_name != 'pull_request' and github.event_name != 'push' }}
+          if ${{ github.event_name != 'pull_request' && github.event_name != 'push' }}
           then
             flag=""
           fi

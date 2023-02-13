@@ -44,5 +44,5 @@ jobs:
 
       - run: poetry publish --build --no-interaction ${{ steps.dry-run.outputs.flag }}
 
-      - run: poetry run mkdocs gh-publish
-        if: ${{ github.event_name != 'pull_request' }}
+      - run: poetry run mkdocs gh-deploy
+        if: ${{ github.event_name != 'pull_request' && github.event_name != 'release' }}

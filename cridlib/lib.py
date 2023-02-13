@@ -72,8 +72,11 @@ class CRID:
     def __repr__(self) -> str:
         """Pretty print CRID.
 
+        ```python
         >>> CRID("crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z")
         <class 'cridlib.lib.CRID' for 'crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z'>
+
+        ```
 
         """
         _fqcn = f"{self.__class__.__module__}.{self.__class__.__qualname__}"

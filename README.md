@@ -52,7 +52,7 @@ pytest
 ## Release Management
 
 The CI/CD setup uses semantic commit messages following the [conventional commits standard](https://www.conventionalcommits.org/en/v1.0.0/).
-There is a GitHub Action in [.github/workflows/semantic-release.yaml](./.github/workflows/semantic-release.yaml)
+There is a GitHub Action [`semantic-release.yaml` in radiorabe/actions](https://github.com/radiorabe/actions/blob/main/.github/workflows/semantic-release.yaml)
 that uses [go-semantic-commit](https://go-semantic-release.xyz/) to create new
 releases.
 

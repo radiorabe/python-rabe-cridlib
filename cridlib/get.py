@@ -11,11 +11,14 @@ def get(timestamp=None, fragment="") -> CRID:
 
     If you need to get the CRID for a specific point in RaBe time using a human-readable timezone:
 
+    ```python
     >>> from datetime import datetime
     >>> from pytz import timezone
     >>> crid = get(datetime(2020, 3, 1, 00, 00, tzinfo=timezone('Europe/Zurich')))
     >>> print(f"version: {crid.version}, start: {crid.start}")
     version: v1, start: ...
+
+    ```
 
     """
     _now = datetime.now(timezone.utc)

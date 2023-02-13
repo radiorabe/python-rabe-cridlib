@@ -1,0 +1,43 @@
+site_name: rabe-cridlib
+repo_url: https://github.com/radiorabe/python-rabe-cridlib
+repo_name: radiorabe/python-rabe-cridlib
+
+theme:
+  name: "material"
+  icon:
+    repo: fontawesome/brands/git-alt
+  features:
+    - content.action.edit
+    - content.code.copy
+
+markdown_extensions:
+- pymdownx.highlight:
+    anchor_linenums: true
+- pymdownx.inlinehilite
+- pymdownx.snippets
+- pymdownx.superfences
+
+extra_css:
+- css/code_select.css
+
+plugins:
+- search
+- autorefs
+- gen-files:
+    scripts:
+    - docs/gen_ref_pages.py
+- literate-nav:
+    nav_file: SUMMARY.md
+- section-index
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [cridlib]
+
+nav:
+  - Information: index.md
+  - API Reference: reference/
+
+watch:
+  - README.md
+  - cridlib/

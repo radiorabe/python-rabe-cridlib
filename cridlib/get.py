@@ -2,7 +2,7 @@
 
 from datetime import datetime, timezone
 
-from .lib import CRID
+from .lib import CRID, canonicalize_show
 from .strategy import future, now, past
 
 
@@ -30,6 +30,9 @@ def get(timestamp=None, fragment="") -> CRID:
         _show = past.get_show(past=_ts)
     elif _ts > _now:  # pragma: no cover
         _show = future.get_show(future=_ts)
+
+    if _show:
+        _show = canonicalize_show(_show)
 
     _tscode = f"t=clock={_ts.strftime('%Y%m%dT%H%M%S.%f')[:-4]}Z"
     _fragment = f"{_tscode}{'&' + fragment if fragment else ''}"

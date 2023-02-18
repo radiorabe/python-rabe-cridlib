@@ -5,7 +5,13 @@ from pathlib import PurePath
 from typing import Optional
 from urllib.parse import parse_qs
 
+from slugify import slugify
 from uritools import uricompose, urisplit  # type: ignore
+
+
+def canonicalize_show(show: str):
+    """Get the slug for a show using python-slugify."""
+    return slugify(show)
 
 
 class CRIDError(Exception):
@@ -44,12 +50,12 @@ class CRID:
 
         self._uri = urisplit(_uri)
         if self.scheme != "crid":
-            raise CRIDSchemeMismatchError(self.scheme)
+            raise CRIDSchemeMismatchError(self.scheme, _uri)
         if self.authority != "rabe.ch":
-            raise CRIDSchemeAuthorityMismatchError(self.authority)
+            raise CRIDSchemeAuthorityMismatchError(self.authority, _uri)
         # parent.stem contains version in /v1/foo paths, stem in generic root /v1 path
         if self.path.parent.stem != "v1" and self.path.stem != "v1":
-            raise CRIDUnsupportedVersionError(self.path)
+            raise CRIDUnsupportedVersionError(self.path, _uri)
         self._version = self.path.parent.stem or self.path.stem
         # only store show if we have one
         if self.path.stem != "v1":
@@ -62,9 +68,9 @@ class CRID:
                     "%Y%m%dT%H%M%S.%fZ",
                 )
             except KeyError as ex:
-                raise CRIDMissingMediaFragmentError(self.fragment) from ex
+                raise CRIDMissingMediaFragmentError(self.fragment, _uri) from ex
             except ValueError as ex:  # pragma: no cover
-                raise CRIDMalformedMediaFragmentError(self.fragment) from ex
+                raise CRIDMalformedMediaFragmentError(self.fragment, _uri) from ex
 
     def __str__(self) -> str:
         return uricompose(*self._uri)

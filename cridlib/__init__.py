@@ -1,14 +1,7 @@
 """Generate RaBe Content Reference Idenitifier Spcification (CRID) Identifiers.
 
-# `get(timestamp=None, fragment='')`
-::: cridlib.get.get
-    options:
-      show_source: false
-
-# `parse(value)`
-::: cridlib.parse.parse
-    options:
-      show_source: false
+* [`cridlib.get(timestamp=None, fragment='')`](./get/#cridlib.get.get)
+* [`cridlib.parse(value)`](./parse/#gridlib.parse.parse)
 """
 
 from .get import get

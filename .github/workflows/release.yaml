@@ -28,13 +28,13 @@ jobs:
 
       - name: Configure poetry
         run: poetry config pypi-token.pypi ${{ secrets.RABE_PYPI_TOKEN }}
-        if: ${{ github.event_name != 'pull_request' && github.event_name != 'push' }}
+        if: ${{ github.event_name == 'release' }}
 
       - name: Set dry-run flag
         id: dry-run
         run: |
           flag="--dry-run"
-          if ${{ github.event_name != 'pull_request' && github.event_name != 'push' }}
+          if ${{ github.event_name == 'release' }}
           then
             flag=""
           fi
@@ -45,4 +45,4 @@ jobs:
       - run: poetry publish --build --no-interaction ${{ steps.dry-run.outputs.flag }}
 
       - run: poetry run mkdocs gh-deploy
-        if: ${{ github.event_name != 'pull_request' && github.event_name != 'release' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}

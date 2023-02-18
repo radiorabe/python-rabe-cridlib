@@ -479,6 +479,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../util/" class="md-nav__link">
+        util
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -622,7 +636,7 @@
 <a id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-0-19" name="__codelineno-0-19"></a>
 <a id="__codelineno-0-20" name="__codelineno-0-20"></a>    <span class="n">_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">__ARCHIV_BROADCASTS_URL</span><span class="si">}{</span><span class="n">past</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">past</span><span class="o">.</span><span class="n">month</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">past</span><span class="o">.</span><span class="n">day</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">past</span><span class="o">.</span><span class="n">hour</span><span class="si">:</span><span class="s2">02d</span><span class="si">}{</span><span class="n">past</span><span class="o">.</span><span class="n">minute</span><span class="si">:</span><span class="s2">02d</span><span class="si">}{</span><span class="n">past</span><span class="o">.</span><span class="n">second</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">&quot;</span>  <span class="c1"># pylint: disable=line-too-long</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21"></a>    <span class="n">_resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21"></a>    <span class="n">_resp</span> <span class="o">=</span> <span class="n">get_session</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <a id="__codelineno-0-22" name="__codelineno-0-22"></a>    <span class="n">_json</span> <span class="o">=</span> <span class="n">_resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <a id="__codelineno-0-23" name="__codelineno-0-23"></a>    <span class="n">_data</span> <span class="o">=</span> <span class="n">_json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-24" name="__codelineno-0-24"></a>    <span class="n">_label</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;attributes&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;label&quot;</span><span class="p">))</span>
@@ -675,6 +689,21 @@
           </div>
         </a>
       
+      
+        
+        <a href="../../util/" class="md-footer__link md-footer__link--next" aria-label="Next: util" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              util
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
       
     </nav>
   

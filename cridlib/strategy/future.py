@@ -1,8 +1,9 @@
 from datetime import datetime, timezone
 from pathlib import PurePath
 
-import requests
 from uritools import urisplit  # type: ignore
+
+from ..util import get_session
 
 __LIBRETIME_INFOV2_URL = (
     "https://airtime.service.int.rabe.ch/api/live-info-v2/format/json"
@@ -22,7 +23,7 @@ def get_show(future: datetime) -> str:  # pragma: no cover
         Name of the show scheduled for `future`.
     """
 
-    _resp = requests.get(
+    _resp = get_session().get(
         __LIBRETIME_INFOV2_URL,
         params={
             "days": 7,

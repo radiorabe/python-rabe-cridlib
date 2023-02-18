@@ -1,25 +1,32 @@
-"""Main "get" interface for RaBe CRID's."""
-
 from datetime import datetime, timezone
+from typing import Optional
 
 from .lib import CRID, canonicalize_show
 from .strategy import future, now, past
 
 
-def get(timestamp=None, fragment="") -> CRID:
+def get(timestamp: Optional[datetime] = None, fragment: str = "") -> CRID:
     """Get a RaBe CRID.
 
-    If you need to get the CRID for a specific point in RaBe time using a human-readable timezone:
+    Examples:
+        You can get a CRID for a specific time.
 
-    ```python
-    >>> from datetime import datetime
-    >>> from pytz import timezone
-    >>> crid = get(datetime(2020, 3, 1, 00, 00, tzinfo=timezone('Europe/Zurich')))
-    >>> print(f"version: {crid.version}, start: {crid.start}")
-    version: v1, start: ...
+        ```python
+        >>> from datetime import datetime
+        >>> from pytz import timezone
+        >>> crid = get(datetime(2020, 3, 1, 00, 00, tzinfo=timezone('Europe/Zurich')))
+        >>> print(f"version: {crid.version}, start: {crid.start}")
+        version: v1, start: ...
 
-    ```
+        ```
 
+    Parameters:
+        timestamp: Exact time you want a CRID for.
+            If left empty, a CRID for the current time is generated.
+        fragment: Optional fragment to add to the end of the CRID.
+
+    Returns:
+        CRID: The generated CRID.
     """
     _now = datetime.now(timezone.utc)
     _ts = timestamp or _now

@@ -1,5 +1,3 @@
-"""The future strategy implements getting data from LibreTime."""
-
 from datetime import datetime, timezone
 from pathlib import PurePath
 
@@ -12,7 +10,17 @@ __LIBRETIME_INFOV2_URL = (
 
 
 def get_show(future: datetime) -> str:  # pragma: no cover
-    """Return the slug for a show from LibreTime if it is in the next 7 days."""
+    """Return the slug for a show from LibreTime if it is in the next 7 days.
+
+    Only returns a show for the next seven days because everything futher than
+    that is considered unreliable as of early 2023.
+
+    Parameters:
+        future: Date to get the show name for.
+
+    Returns:
+        Name of the show scheduled for `future`.
+    """
 
     _resp = requests.get(
         __LIBRETIME_INFOV2_URL,

@@ -51,7 +51,6 @@ pytest-pycodestyle = "^2.3.1"
 types-python-slugify = "^8.0.0.0"
 
 [tool.isort]
-line_length = 120
 profile = "black"
 
 [tool.pylint.messages_control]

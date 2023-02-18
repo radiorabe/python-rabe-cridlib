@@ -1,4 +1,4 @@
-"""Different strategies for getting crids from different sources.
+"""Different strategies for getting CRIDs from different sources.
 
 * [`cridlib.strategy.past`](./past/)
 * [`cridlib.strategy.present`](./present/)

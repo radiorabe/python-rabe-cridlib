@@ -1,5 +1,3 @@
-"""The past strategy implements getting data from archiv.rabe.ch."""
-
 from datetime import datetime
 
 import requests
@@ -8,7 +6,16 @@ __ARCHIV_BROADCASTS_URL = "https://archiv.rabe.ch/api/broadcasts/"
 
 
 def get_show(past: datetime) -> str:
-    """Return the a show slug from a past show."""
+    """Return a show from the past.
+
+    Asks the the [raar](https://github.com/radiorabe/raar) archive for the info.
+
+    Parameters:
+        past: Date to get the show name for.
+
+    Returns:
+        Show name from the archive for `past`.
+    """
 
     _url = f"{__ARCHIV_BROADCASTS_URL}{past.year}/{past.month:02d}/{past.day:02d}/{past.hour:02d}{past.minute:02d}{past.second:02d}"  # pylint: disable=line-too-long
     _resp = requests.get(_url, timeout=10)

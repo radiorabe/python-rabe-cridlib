@@ -1,5 +1,3 @@
-"""Low-level cridlib implemenetation bits."""
-
 from datetime import datetime
 from pathlib import PurePath
 from typing import Optional
@@ -9,8 +7,14 @@ from slugify import slugify
 from uritools import uricompose, urisplit  # type: ignore
 
 
-def canonicalize_show(show: str):
-    """Get the slug for a show using python-slugify."""
+def canonicalize_show(show: str) -> str:
+    """Get the slug for a show using [python-slugify](https://github.com/un33k/python-slugify).
+
+    Parameters:
+        show: Name of show with non-ascii chars.
+    Returns:
+        slugified show name.
+    """
     return slugify(show)
 
 
@@ -42,20 +46,40 @@ CRIDPath = PurePath
 
 
 class CRID:
-    """Represent CRIDs using uri."""
+    """Represent CRIDs and can parse, validate and render them.
 
-    def __init__(self, _uri=None) -> None:
+    Examples:
+        Generate a CRID from an URL and render it's repr:
+        ```python
+        >>> CRID("crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z")
+        <class 'cridlib.lib.CRID' for 'crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z'>
+
+        ```
+
+        Generate a CRID and render it as str:
+        ```python
+        >>> str(CRID("crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z"))
+        'crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z'
+
+        ```
+    """
+
+    def __init__(self, uri: Optional[str] = None) -> None:
+        """
+        Parameters:
+            uri: CRID URL to base the new CRID off of.
+        """
         self._show: Optional[str] = None
         self._start: Optional[datetime] = None
 
-        self._uri = urisplit(_uri)
+        self._uri = urisplit(uri)
         if self.scheme != "crid":
-            raise CRIDSchemeMismatchError(self.scheme, _uri)
+            raise CRIDSchemeMismatchError(self.scheme, uri)
         if self.authority != "rabe.ch":
-            raise CRIDSchemeAuthorityMismatchError(self.authority, _uri)
+            raise CRIDSchemeAuthorityMismatchError(self.authority, uri)
         # parent.stem contains version in /v1/foo paths, stem in generic root /v1 path
         if self.path.parent.stem != "v1" and self.path.stem != "v1":
-            raise CRIDUnsupportedVersionError(self.path, _uri)
+            raise CRIDUnsupportedVersionError(self.path, uri)
         self._version = self.path.parent.stem or self.path.stem
         # only store show if we have one
         if self.path.stem != "v1":
@@ -68,57 +92,73 @@ class CRID:
                     "%Y%m%dT%H%M%S.%fZ",
                 )
             except KeyError as ex:
-                raise CRIDMissingMediaFragmentError(self.fragment, _uri) from ex
+                raise CRIDMissingMediaFragmentError(self.fragment, uri) from ex
             except ValueError as ex:  # pragma: no cover
-                raise CRIDMalformedMediaFragmentError(self.fragment, _uri) from ex
+                raise CRIDMalformedMediaFragmentError(self.fragment, uri) from ex
 
     def __str__(self) -> str:
+        """
+        Returns:
+            CRID URL  rendered as string.
+        """
         return uricompose(*self._uri)
 
     def __repr__(self) -> str:
-        """Pretty print CRID.
-
-        ```python
-        >>> CRID("crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z")
-        <class 'cridlib.lib.CRID' for 'crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z'>
-
-        ```
-
-        """
         _fqcn = f"{self.__class__.__module__}.{self.__class__.__qualname__}"
         return f"<class '{_fqcn}' for '{str(self)}'>"
 
     @property
     def scheme(self) -> str:
-        """Get RaBe CRID scheme."""
+        """
+        Returns:
+            Scheme part of the CRID.
+        """
         return self._uri.scheme
 
     @property
     def authority(self) -> str:
-        """Get RaBe CRID authority."""
+        """
+        Returns:
+            Authority part (aka hostname) of CRID.
+        """
         return self._uri.authority
 
     @property
     def path(self) -> CRIDPath:
-        """Get RaBe CRID path."""
+        """
+        Returns:
+            Path part of CRID.
+        """
         return CRIDPath(self._uri.path)
 
     @property
     def fragment(self) -> str:
-        """Get RaBe CRID fragment."""
+        """
+        Returns:
+            Framgment part of CRID.
+        """
         return self._uri.fragment
 
     @property
     def version(self) -> str:
-        """Get RaBe CRID version."""
+        """
+        Returns:
+            Version from CRIDs path.
+        """
         return self._version
 
     @property
     def show(self) -> Optional[str]:
-        """Get RaBe CRID show."""
+        """
+        Returns:
+            Show slug from CRIDs path.
+        """
         return self._show
 
     @property
     def start(self) -> Optional[datetime]:
-        """Get RaBe CRID start time."""
+        """
+        Returns:
+            Start time form CRIDs media fragment.
+        """
         return self._start

@@ -63,3 +63,13 @@ def test_crid_version_mismatch():
 def test_crid_missing_media_fragment():
     with raises(cridlib.lib.CRIDMissingMediaFragmentError):
         cridlib.lib.CRID("crid://rabe.ch/v1/test#t=wrong=10")
+
+
+@mark.parametrize(
+    "show,expected",
+    [
+        ("à suivre #42", "a-suivre-42"),
+    ],
+)
+def test_canonicalize_show(show, expected):
+    assert expected == cridlib.lib.canonicalize_show(show)

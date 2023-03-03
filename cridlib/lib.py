@@ -8,7 +8,9 @@ from uritools import uricompose, urisplit  # type: ignore
 
 
 def canonicalize_show(show: str) -> str:
-    """Get the slug for a show using [python-slugify](https://github.com/un33k/python-slugify).
+    """Get the slug for a show.
+
+    Uses [python-slugify](https://github.com/un33k/python-slugify).
 
     Parameters:
         show: Name of show with non-ascii chars.
@@ -62,7 +64,7 @@ class CRID:
         'crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z'
 
         ```
-    """
+    """  # noqa: E501
 
     def __init__(self, uri: Optional[str] = None) -> None:
         """

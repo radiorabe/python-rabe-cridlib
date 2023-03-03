@@ -6,6 +6,7 @@ metadata:
   description: Generate RaBe CRIDs for current show, past shows, and show in the near future.
   annotations:
     backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: radiorabe/python-rabe-cridlib
 spec:
   type: library
   lifecycle: experimental

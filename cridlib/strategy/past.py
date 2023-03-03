@@ -17,7 +17,7 @@ def get_show(past: datetime) -> str:
         Show name from the archive for `past`.
     """
 
-    _url = f"{__ARCHIV_BROADCASTS_URL}{past.year}/{past.month:02d}/{past.day:02d}/{past.hour:02d}{past.minute:02d}{past.second:02d}"  # pylint: disable=line-too-long
+    _url = f"{__ARCHIV_BROADCASTS_URL}{past.year}/{past.month:02d}/{past.day:02d}/{past.hour:02d}{past.minute:02d}{past.second:02d}"  # noqa: E501
     _resp = get_session().get(_url, timeout=10)
     _json = _resp.json()
     _data = _json.get("data")

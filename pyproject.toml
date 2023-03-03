@@ -28,17 +28,12 @@ pytest = "^7.2.0"
 pytest-cov = "^4.0.0"
 wheel = "^0.38.4"
 types-requests = "^2.28.11"
-flake8 = "^6.0.0"
-flake8-docstrings = "^1.6.0"
-flake8-string-format = "^0.3.0"
-flake8-tuple = "^0.4.1"
 freezegun = "^1.2.2"
 requests-mock = "^1.10.0"
 black = ">=22.12,<24.0"
 isort = "^5.11.4"
 Markdown = "^3.3"
 pytest-mypy = "^0.10.3"
-pytest-pylint = "^0.19.0"
 pytest-random-order = "^1.1.0"
 types-pytz = "^2022.7.0"
 mkdocstrings = {extras = ["python"], version = "^0.20.0"}
@@ -47,25 +42,14 @@ mkdocs = "^1.4.2"
 mkdocs-gen-files = "^0.4.0"
 mkdocs-literate-nav = "^0.6.0"
 mkdocs-section-index = "^0.3.5"
-pytest-pycodestyle = "^2.3.1"
 types-python-slugify = "^8.0.0.0"
 
 [tool.isort]
 profile = "black"
 
-[tool.pylint.messages_control]
-# C0114 = missing-module-docstring
-# C0116 = missing-function-docstring
-disable = ["C0114","C0116"]
-
 [tool.pytest.ini_options]
 minversion = "7.2"
-addopts = "-ra -q --random-order --doctest-glob='*.md' --doctest-modules --cov=cridlib --cov-fail-under=100 --pylint --ignore=docs/ --mypy"
-filterwarnings = [
-    "ignore::pytest.PytestRemovedIn8Warning:pytest_pylint",
-    "ignore::DeprecationWarning:pylint",
-    "ignore::DeprecationWarning:pytest_pylint",
-]
+addopts = "-ra -q --random-order --doctest-glob='*.md' --doctest-modules --cov=cridlib --cov-fail-under=100 --ignore=docs/ --mypy"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

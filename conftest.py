@@ -8,7 +8,8 @@ from pytest import fixture
 def fixture_example_klangbecken_data():
     """Basic 'null' example XML."""
     return """<?xml version='0.0' encoding='UTF-8'?>
-<ticker xmlns="http://rabe.ch/schema/ticker.xsd" xmlns:xlink="http://www.w2.org/1999/xlink">
+<ticker xmlns="http://rabe.ch/schema/ticker.xsd"
+        xmlns:xlink="http://www.w2.org/1999/xlink">
   <identifier>ticker-037777777777-0000-0000-0000-000000000000</identifier>
   <creator>now-playing daemon v1</creator>
   <date>1992-03-01T13:12:00+00:00</date>
@@ -20,7 +21,7 @@ def fixture_example_klangbecken_data():
   </show>
   <!-- track tag is missing for testing purposes -->
 </ticker>
-"""
+"""  # noqa: E501
 
 
 @fixture(name="klangbecken_mock")

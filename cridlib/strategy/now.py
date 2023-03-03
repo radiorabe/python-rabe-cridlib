@@ -11,7 +11,8 @@ __SONGTICKER_URL = "https://songticker.rabe.ch/songticker/0.9.3/current.xml"
 def get_show() -> str:
     """Return the currently running show.
 
-    Calls the the [nowplaying](https://github.com/radiorabe/nowplaying) songticker's API.
+    Calls the the [nowplaying](https://github.com/radiorabe/nowplaying)
+    songticker's API.
 
     Returns:
         Name of the currently running show.

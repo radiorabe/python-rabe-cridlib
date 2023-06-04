@@ -22,6 +22,7 @@ requests = "^2.28.1"
 uritools = "^4.0.0"
 pytz = ">=2022.6"
 python-slugify = "^8.0.0"
+cachecontrol = "^0.13.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2.0"
@@ -50,6 +51,7 @@ profile = "black"
 [tool.pytest.ini_options]
 minversion = "7.2"
 addopts = "-ra -q --random-order --doctest-glob='*.md' --doctest-modules --cov=cridlib --cov-fail-under=100 --ignore=docs/ --mypy"
+filterwarnings = ["ignore::DeprecationWarning:pytest_freezegun"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

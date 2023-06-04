@@ -582,7 +582,11 @@
           <td>
                 <code>int</code>
           </td>
-          <td><p>How often to retry.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>How often to retry.</p>
+            </div>
+          </td>
           <td>
                 <code>5</code>
           </td>
@@ -592,14 +596,18 @@
           <td>
                 <code>float</code>
           </td>
-          <td><p>A backoff factor to apply between attempts after the
+          <td>
+            <div class="doc-md-description">
+              <p>A backoff factor to apply between attempts after the
 second try (most errors are resolved immediately by a second try
 without a delay). urllib3 will sleep for::
     {backoff factor} * (2 ** ({number of total retries} - 1))
 seconds. If the backoff_factor is 0.1, then :func:<code>Retry.sleep</code>
 will sleep for [0.0s, 0.2s, 0.4s, ...] between retries. It will
 never be longer than <code>backoff_max</code>.
-By default, backoff is set to 0.1.</p></td>
+By default, backoff is set to 0.1.</p>
+            </div>
+          </td>
           <td>
                 <code>0.1</code>
           </td>

@@ -21,6 +21,6 @@ def get_show(past: datetime) -> str:
     _resp = get_session().get(_url, timeout=10)
     _json = _resp.json()
     _data = _json.get("data")
-    _label = str(_data[0].get("attributes").get("label"))
+    _label = str(_data[0].get("attributes").get("label")) if len(_data) == 1 else ""
 
     return _label.lower().replace(" ", "-")

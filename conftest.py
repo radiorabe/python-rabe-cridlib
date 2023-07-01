@@ -42,6 +42,15 @@ def fixture_archiv_mock(requests_mock):
     )
 
 
+@fixture(name="empty_archiv_mock")
+def fixture_empty_archiv_mock(requests_mock):
+    """Mock empty record from Archiv."""
+    return requests_mock.get(
+        "https://archiv.rabe.ch/api/broadcasts/1993/03/01/131200",
+        json={"data": []},
+    )
+
+
 @fixture(name="libretime_mock")
 def fixture_libretime_mock(requests_mock):
     return requests_mock.get(

@@ -14,3 +14,11 @@ def test_get_show(archiv_mock):  # pylint: disable=unused-argument
     with freeze_time("1993-03-01 13:12:00 UTC"):
         show = cridlib.strategy.past.get_show(datetime.now())
     assert show == "test"
+
+
+def test_get_show_empty(empty_archiv_mock):  # pylint: disable=unused-argument
+    """Test get_data."""
+
+    with freeze_time("1993-03-01 13:12:00 UTC"):
+        show = cridlib.strategy.past.get_show(datetime.now())
+    assert show == ""

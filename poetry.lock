@@ -1458,13 +1458,13 @@ files = [
 
 [[package]]
 name = "uritools"
-version = "4.0.1"
+version = "4.0.2"
 description = "URI parsing, classification and composition"
 optional = false
-python-versions = "~=3.7"
+python-versions = ">=3.7"
 files = [
-    {file = "uritools-4.0.1-py3-none-any.whl", hash = "sha256:d122d394ed6e6e15ac0fddba6a5b19e9fa204e7797507815cbfb0e1455ac0475"},
-    {file = "uritools-4.0.1.tar.gz", hash = "sha256:efc5c3a6de05404850685a8d3f34da8476b56aa3516fbf8eff5c8704c7a2826f"},
+    {file = "uritools-4.0.2-py3-none-any.whl", hash = "sha256:607b15eae1e7b69a120f463a7d98f91a56671e1ab92aae13f8e1f25c017fe60e"},
+    {file = "uritools-4.0.2.tar.gz", hash = "sha256:04df2b787d0eb76200e8319382a03562fbfe4741fd66c15506b08d3b8211d573"},
 ]
 
 [[package]]

@@ -1,4 +1,5 @@
 """Configureation for pytest."""
+
 # pylint: disable=line-too-long
 
 from pytest import fixture

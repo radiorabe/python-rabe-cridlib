@@ -407,7 +407,7 @@
         <li class="md-nav__item">
   <a href="#cridlib.get" class="md-nav__link">
     <span class="md-ellipsis">
-      cridlib.get
+      get
     </span>
   </a>
   
@@ -416,7 +416,7 @@
         <li class="md-nav__item">
   <a href="#cridlib.get.get" class="md-nav__link">
     <span class="md-ellipsis">
-      get()
+      get
     </span>
   </a>
   
@@ -648,6 +648,7 @@
 <div class="doc doc-object doc-module">
 
 
+
 <a id="cridlib.get"></a>
   <div class="doc doc-contents first">
 
@@ -663,12 +664,13 @@
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
 
 <h2 id="cridlib.get.get" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">timestamp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fragment</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="n">timestamp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fragment</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code>
 
 </h2>
 
@@ -676,6 +678,8 @@
   <div class="doc doc-contents ">
   
       <p>Get a RaBe CRID.</p>
+
+
 
 <p><strong>Examples:</strong></p>
     <p>You can get a CRID for a specific time.</p>
@@ -685,6 +689,8 @@
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;version: </span><span class="si">{</span><span class="n">crid</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">, start: </span><span class="si">{</span><span class="n">crid</span><span class="o">.</span><span class="n">start</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">version</span><span class="p">:</span> <span class="n">v1</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="o">...</span>
 </code></pre></div>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -729,6 +735,8 @@ If left empty, a CRID for the current time is generated.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -751,9 +759,9 @@ If left empty, a CRID for the current time is generated.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>cridlib/get.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+          <details class="quote">
+            <summary>Source code in <code>cridlib/get.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-0-10">10</a></span>
 <span class="normal"><a href="#__codelineno-0-11">11</a></span>
@@ -833,7 +841,7 @@ If left empty, a CRID for the current time is generated.</p>
 <a id="__codelineno-0-46" name="__codelineno-0-46"></a>
 <a id="__codelineno-0-47" name="__codelineno-0-47"></a>    <span class="k">return</span> <span class="n">CRID</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;crid://rabe.ch/v1</span><span class="si">{</span><span class="s1">&#39;/&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">_show</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">_show</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">#</span><span class="si">{</span><span class="n">_fragment</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>

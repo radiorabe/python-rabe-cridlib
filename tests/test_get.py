@@ -7,18 +7,18 @@ from freezegun import freeze_time
 import cridlib
 
 
-def test_get_now(klangbecken_mock):  # pylint: disable=unused-argument
+def test_get_now(klangbecken_mock):  # noqa: ARG001
     """Test meth:`get` for currently running show."""
     crid = cridlib.get()
     assert crid.version == "v1"
     assert crid.show == "test"
 
 
-def test_get_past(archiv_mock):  # pylint: disable=unused-argument
+def test_get_past(archiv_mock):  # noqa: ARG001
     """Test meth:`get` for past shows."""
     with freeze_time("1993-03-02 00:00:00 UTC"):
         crid = cridlib.get(
-            timestamp=datetime(1993, 3, 1, 13, 12, 00, tzinfo=timezone.utc)
+            timestamp=datetime(1993, 3, 1, 13, 12, 00, tzinfo=timezone.utc),
         )
     assert crid.version == "v1"
     assert crid.show == "test"
@@ -35,7 +35,7 @@ def test_get_past(archiv_mock):  # pylint: disable=unused-argument
     assert str(crid) == "crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z&myid=1234"
 
 
-def test_get_future(libretime_mock):  # pylint: disable=unused-argument
+def test_get_future(libretime_mock):  # noqa: ARG001
     """Test meth:`get` for future shows."""
     with freeze_time("1993-03-01 00:00:00 UTC"):
         crid = cridlib.get(

@@ -1,14 +1,18 @@
+"""Get a RaBe CRID."""
+
+from __future__ import annotations
+
 from datetime import datetime, timezone
-from typing import Optional
 
 from .lib import CRID, canonicalize_show
 from .strategy import future, now, past
 
 
-def get(timestamp: Optional[datetime] = None, fragment: str = "") -> CRID:
+def get(timestamp: datetime | None = None, fragment: str = "") -> CRID:
     """Get a RaBe CRID.
 
     Examples:
+    --------
         You can get a CRID for a specific time.
 
         ```python
@@ -20,13 +24,16 @@ def get(timestamp: Optional[datetime] = None, fragment: str = "") -> CRID:
 
         ```
 
-    Parameters:
+    Args:
+    ----
         timestamp: Exact time you want a CRID for.
             If left empty, a CRID for the current time is generated.
         fragment: Optional fragment to add to the end of the CRID.
 
     Returns:
+    -------
         CRID: The generated CRID.
+
     """
     _now = datetime.now(timezone.utc)
     _ts = timestamp or _now

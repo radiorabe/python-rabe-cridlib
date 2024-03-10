@@ -2,10 +2,10 @@
 
 # pylint: disable=line-too-long
 
-from pytest import fixture
+import pytest
 
 
-@fixture(name="example_klangbecken_data")
+@pytest.fixture(name="example_klangbecken_data")
 def fixture_example_klangbecken_data():
     """Basic 'null' example XML."""
     return """<?xml version='0.0' encoding='UTF-8'?>
@@ -22,10 +22,10 @@ def fixture_example_klangbecken_data():
   </show>
   <!-- track tag is missing for testing purposes -->
 </ticker>
-"""  # noqa: E501
+"""
 
 
-@fixture(name="klangbecken_mock")
+@pytest.fixture(name="klangbecken_mock")
 def fixture_klangbecken_mock(requests_mock, example_klangbecken_data):
     """Mock null returning Klangbecken."""
     return requests_mock.get(
@@ -34,7 +34,7 @@ def fixture_klangbecken_mock(requests_mock, example_klangbecken_data):
     )
 
 
-@fixture(name="archiv_mock")
+@pytest.fixture(name="archiv_mock")
 def fixture_archiv_mock(requests_mock):
     """Mock null returning Archiv."""
     return requests_mock.get(
@@ -43,7 +43,7 @@ def fixture_archiv_mock(requests_mock):
     )
 
 
-@fixture(name="empty_archiv_mock")
+@pytest.fixture(name="empty_archiv_mock")
 def fixture_empty_archiv_mock(requests_mock):
     """Mock empty record from Archiv."""
     return requests_mock.get(
@@ -52,7 +52,7 @@ def fixture_empty_archiv_mock(requests_mock):
     )
 
 
-@fixture(name="libretime_mock")
+@pytest.fixture(name="libretime_mock")
 def fixture_libretime_mock(requests_mock):
     return requests_mock.get(
         "https://airtime.service.int.rabe.ch/api/live-info-v2/format/json",
@@ -98,7 +98,7 @@ def fixture_libretime_mock(requests_mock):
                         "starts": "1993-03-01 11:00:00",
                         "ends": "1993-03-01 11:30:00",
                     },
-                ]
+                ],
             },
         },
     )

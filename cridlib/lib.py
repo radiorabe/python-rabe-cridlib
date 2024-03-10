@@ -1,10 +1,14 @@
+"""Main Cridlib library."""
+
+from __future__ import annotations
+
 from datetime import datetime
 from pathlib import PurePath
-from typing import Optional
+from typing import Self
 from urllib.parse import parse_qs
 
 from slugify import slugify
-from uritools import uricompose, urisplit  # type: ignore
+from uritools import uricompose, urisplit  # type: ignore[import-untyped]
 
 
 def canonicalize_show(show: str) -> str:
@@ -12,10 +16,14 @@ def canonicalize_show(show: str) -> str:
 
     Uses [python-slugify](https://github.com/un33k/python-slugify).
 
-    Parameters:
+    Args:
+    ----
         show: Name of show with non-ascii chars.
+
     Returns:
+    -------
         slugified show name.
+
     """
     return slugify(show)
 
@@ -50,7 +58,8 @@ CRIDPath = PurePath
 class CRID:
     """Represent CRIDs and can parse, validate and render them.
 
-    Examples:
+    Examples
+    --------
         Generate a CRID from an URL and render it's repr:
         ```python
         >>> CRID("crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z")
@@ -64,15 +73,19 @@ class CRID:
         'crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z'
 
         ```
-    """  # noqa: E501
 
-    def __init__(self, uri: Optional[str] = None) -> None:
-        """
-        Parameters:
+    """
+
+    def __init__(self: Self, uri: str | None = None) -> None:
+        """Create new CRID.
+
+        Args:
+        ----
             uri: CRID URL to base the new CRID off of.
+
         """
-        self._show: Optional[str] = None
-        self._start: Optional[datetime] = None
+        self._show: str | None = None
+        self._start: datetime | None = None
 
         self._uri = urisplit(uri)
         if self.scheme != "crid":
@@ -89,7 +102,9 @@ class CRID:
         # fragments are optional, but if provided we want them to contain t=code
         if self.fragment:
             try:
-                self._start = datetime.strptime(
+                # TODO(hairmare): investigate noqa for bug
+                # https://github.com/radiorabe/python-rabe-cridlib/issues/244
+                self._start = datetime.strptime(  # noqa: DTZ007
                     parse_qs(parse_qs(self.fragment)["t"][0])["clock"][0],
                     "%Y%m%dT%H%M%S.%fZ",
                 )
@@ -98,69 +113,94 @@ class CRID:
             except ValueError as ex:  # pragma: no cover
                 raise CRIDMalformedMediaFragmentError(self.fragment, uri) from ex
 
-    def __str__(self) -> str:
-        """
-        Returns:
-            CRID URL  rendered as string.
+    def __str__(self: Self) -> str:
+        """Stringfy.
+
+        Returns
+        -------
+            CRID URL rendered as string.
+
         """
         return uricompose(*self._uri)
 
-    def __repr__(self) -> str:
+    def __repr__(self: Self) -> str:
+        """Repr."""
         _fqcn = f"{self.__class__.__module__}.{self.__class__.__qualname__}"
-        return f"<class '{_fqcn}' for '{str(self)}'>"
+        return f"<class '{_fqcn}' for '{self!s}'>"
 
     @property
-    def scheme(self) -> str:
-        """
-        Returns:
+    def scheme(self: Self) -> str:
+        """Scheme.
+
+        Returns
+        -------
             Scheme part of the CRID.
+
         """
         return self._uri.scheme
 
     @property
-    def authority(self) -> str:
-        """
-        Returns:
+    def authority(self: Self) -> str:
+        """Authority.
+
+        Returns
+        -------
             Authority part (aka hostname) of CRID.
+
         """
         return self._uri.authority
 
     @property
-    def path(self) -> CRIDPath:
-        """
-        Returns:
+    def path(self: Self) -> CRIDPath:
+        """Path.
+
+        Returns
+        -------
             Path part of CRID.
+
         """
         return CRIDPath(self._uri.path)
 
     @property
-    def fragment(self) -> str:
-        """
-        Returns:
-            Framgment part of CRID.
+    def fragment(self: Self) -> str:
+        """Fragment.
+
+        Returns
+        -------
+            Fragment part of CRID.
+
         """
         return self._uri.fragment
 
     @property
-    def version(self) -> str:
-        """
-        Returns:
+    def version(self: Self) -> str:
+        """Version.
+
+        Returns
+        -------
             Version from CRIDs path.
+
         """
         return self._version
 
     @property
-    def show(self) -> Optional[str]:
-        """
-        Returns:
+    def show(self: Self) -> str | None:
+        """Slug.
+
+        Returns
+        -------
             Show slug from CRIDs path.
+
         """
         return self._show
 
     @property
-    def start(self) -> Optional[datetime]:
-        """
-        Returns:
+    def start(self: Self) -> datetime | None:
+        """Start time.
+
+        Returns
+        -------
             Start time form CRIDs media fragment.
+
         """
         return self._start

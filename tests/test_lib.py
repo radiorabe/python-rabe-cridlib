@@ -2,21 +2,21 @@
 
 from datetime import datetime
 
+import pytest
 from freezegun import freeze_time
-from pytest import mark, raises
 
 import cridlib
 
 
-@mark.parametrize(
-    "crid_str,expected",
+@pytest.mark.parametrize(
+    ("crid_str", "expected"),
     [
         (
             "crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z",
             {
                 "version": "v1",
                 "show": "test",
-                "start": datetime(1993, 3, 1, 13, 12),
+                "start": datetime(1993, 3, 1, 13, 12),  # noqa: DTZ001
             },
         ),
         (
@@ -32,7 +32,7 @@ import cridlib
             {
                 "version": "v1",
                 "show": None,
-                "start": datetime(1993, 3, 1, 13, 12),
+                "start": datetime(1993, 3, 1, 13, 12),  # noqa: DTZ001
             },
         ),
     ],
@@ -47,27 +47,27 @@ def test_crid_roundtrip(crid_str, expected):
 
 
 def test_crid_scheme_mismatch():
-    with raises(cridlib.lib.CRIDSchemeMismatchError):
+    with pytest.raises(cridlib.lib.CRIDSchemeMismatchError):
         cridlib.lib.CRID("https://rabe.ch/v1/test")
 
 
 def test_crid_hostname_mismatch():
-    with raises(cridlib.lib.CRIDSchemeAuthorityMismatchError):
+    with pytest.raises(cridlib.lib.CRIDSchemeAuthorityMismatchError):
         cridlib.lib.CRID("crid://example.org/v1/test")
 
 
 def test_crid_version_mismatch():
-    with raises(cridlib.lib.CRIDUnsupportedVersionError):
+    with pytest.raises(cridlib.lib.CRIDUnsupportedVersionError):
         cridlib.lib.CRID("crid://rabe.ch/vX/test")
 
 
 def test_crid_missing_media_fragment():
-    with raises(cridlib.lib.CRIDMissingMediaFragmentError):
+    with pytest.raises(cridlib.lib.CRIDMissingMediaFragmentError):
         cridlib.lib.CRID("crid://rabe.ch/v1/test#t=wrong=10")
 
 
-@mark.parametrize(
-    "show,expected",
+@pytest.mark.parametrize(
+    ("show", "expected"),
     [
         ("à suivre #42", "a-suivre-42"),
     ],

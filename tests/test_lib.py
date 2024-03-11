@@ -16,7 +16,7 @@ import cridlib
             {
                 "version": "v1",
                 "show": "test",
-                "start": datetime(1993, 3, 1, 13, 12),  # noqa: DTZ001
+                "start": datetime(1993, 3, 1, 13, 12),
             },
         ),
         (
@@ -32,7 +32,7 @@ import cridlib
             {
                 "version": "v1",
                 "show": None,
-                "start": datetime(1993, 3, 1, 13, 12),  # noqa: DTZ001
+                "start": datetime(1993, 3, 1, 13, 12),
             },
         ),
     ],

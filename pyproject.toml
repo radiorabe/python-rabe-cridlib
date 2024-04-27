@@ -24,7 +24,6 @@ pytz = ">=2022.6"
 python-slugify = "^8.0.0"
 
 [tool.poetry.group.dev.dependencies]
-black = ">=22.12,<25.0"
 freezegun = "^1.2.2"
 Markdown = "^3.3"
 mkdocstrings = {extras = ["python"], version = ">=0.20,<0.25"}

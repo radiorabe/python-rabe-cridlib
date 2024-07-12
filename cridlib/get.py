@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 
 from .lib import CRID, canonicalize_show
 from .strategy import future, now, past
@@ -48,7 +48,7 @@ def get(timestamp: datetime | None = None, fragment: str = "") -> CRID:
     if _show:
         _show = canonicalize_show(_show)
 
-    _tscode = f"t=clock={_ts.strftime('%Y%m%dT%H%M%S.%f')[:-4]}Z"
+    _tscode = f"t=clock={_ts.astimezone(UTC).strftime('%Y%m%dT%H%M%S.%f')[:-4]}Z"
     _fragment = f"{_tscode}{'&' + fragment if fragment else ''}"
 
     return CRID(f"crid://rabe.ch/v1{'/' + _show if _show else ''}#{_fragment}")

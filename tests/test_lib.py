@@ -1,6 +1,6 @@
 """Test high level cridlib API."""
 
-from datetime import datetime
+from datetime import UTC, datetime
 
 import pytest
 from freezegun import freeze_time
@@ -16,7 +16,7 @@ import cridlib
             {
                 "version": "v1",
                 "show": "test",
-                "start": datetime(1993, 3, 1, 13, 12),
+                "start": datetime(1993, 3, 1, 12, 12, tzinfo=UTC),
             },
         ),
         (
@@ -32,13 +32,13 @@ import cridlib
             {
                 "version": "v1",
                 "show": None,
-                "start": datetime(1993, 3, 1, 13, 12),
+                "start": datetime(1993, 3, 1, 12, 12, tzinfo=UTC),
             },
         ),
     ],
 )
 def test_crid_roundtrip(crid_str, expected):
-    with freeze_time("1993-03-01 13:12"):
+    with freeze_time("1993-03-01 12:12 UTC"):
         crid = cridlib.lib.CRID(crid_str)
     assert str(crid) == crid_str
     assert crid.version == expected["version"]

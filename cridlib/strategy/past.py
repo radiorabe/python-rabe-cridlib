@@ -2,9 +2,12 @@
 
 from datetime import datetime
 
+from pytz import timezone
+
 from cridlib.util import get_session
 
 __ARCHIV_BROADCASTS_URL = "https://archiv.rabe.ch/api/broadcasts/"
+__ARCHIV_TIMEZONE = "Europe/Zurich"
 
 
 def get_show(past: datetime) -> str:
@@ -21,7 +24,11 @@ def get_show(past: datetime) -> str:
         Show name from the archive for `past`.
 
     """
-    _url = f"{__ARCHIV_BROADCASTS_URL}{past.year}/{past.month:02d}/{past.day:02d}/{past.hour:02d}{past.minute:02d}{past.second:02d}"  # noqa: E501
+    local = past
+    if past.tzname != __ARCHIV_TIMEZONE:
+        local = past.astimezone(timezone(__ARCHIV_TIMEZONE))
+
+    _url = f"{__ARCHIV_BROADCASTS_URL}{local.year}/{local.month:02d}/{local.day:02d}/{local.hour:02d}{local.minute:02d}{local.second:02d}"  # noqa: E501
     _resp = get_session().get(_url, timeout=10)
     _json = _resp.json()
     _data = _json.get("data")

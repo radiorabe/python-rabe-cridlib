@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import PurePath
 from typing import Self
 from urllib.parse import parse_qs
@@ -104,10 +104,10 @@ class CRID:
             try:
                 # TODO(hairmare): investigate noqa for bug
                 # https://github.com/radiorabe/python-rabe-cridlib/issues/244
-                self._start = datetime.strptime(  # noqa: DTZ007
+                self._start = datetime.strptime(
                     parse_qs(parse_qs(self.fragment)["t"][0])["clock"][0],
                     "%Y%m%dT%H%M%S.%fZ",
-                )
+                ).astimezone(UTC)
             except KeyError as ex:
                 raise CRIDMissingMediaFragmentError(self.fragment, uri) from ex
             except ValueError as ex:  # pragma: no cover

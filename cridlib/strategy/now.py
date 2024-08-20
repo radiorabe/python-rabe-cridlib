@@ -1,6 +1,6 @@
 """Handle currently running show."""
 
-import xml.etree.ElementTree as ET  # noqa: N817
+import xml.etree.ElementTree as ET
 from pathlib import PurePath
 
 from uritools import urisplit  # type: ignore[import-untyped]

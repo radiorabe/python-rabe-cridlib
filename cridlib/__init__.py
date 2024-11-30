@@ -9,7 +9,7 @@ from .lib import CRIDError
 from .parse import parse
 
 __all__ = [
-    "get",
     "CRIDError",
+    "get",
     "parse",
 ]

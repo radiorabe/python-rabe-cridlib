@@ -26,7 +26,7 @@ python-slugify = "^8.0.0"
 [tool.poetry.group.dev.dependencies]
 freezegun = "^1.2.2"
 Markdown = "^3.3"
-mkdocstrings = {extras = ["python"], version = ">=0.20,<0.28"}
+mkdocstrings = {extras = ["python"], version = ">=0.20,<0.29"}
 mkdocs-material = ">=8,<10"
 mkdocs = "^1.4.2"
 mkdocs-gen-files = ">=0.4,<0.6"

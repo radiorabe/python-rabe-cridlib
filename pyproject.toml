@@ -19,7 +19,7 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.11"
 requests = "^2.28.1"
-uritools = "^4.0.0"
+uritools = ">=4,<6"
 pytz = ">=2022.6"
 python-slugify = "^8.0.0"
 

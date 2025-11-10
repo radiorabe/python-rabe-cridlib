@@ -46,7 +46,7 @@ wheel = ">=0.38.4,<0.47.0"
 
 [tool.pytest]
 minversion = "9.0"
-addopts = ["-ra", "-q", "--random-order", "--doctest-glob='*.md'", "--doctest-modules", "--cov=cridlib", "--cov-fail-under=100", "--ignore=docs/", "--mypy" "--ruff"]
+addopts = ["-ra", "-q", "--random-order", "--doctest-glob='*.md'", "--doctest-modules", "--cov=cridlib", "--cov-fail-under=100", "--ignore=docs/", "--mypy", "--ruff"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -1193,14 +1193,14 @@ files = [
 
 [[package]]
 name = "uritools"
-version = "5.0.0"
+version = "6.0.1"
 description = "URI parsing, classification and composition"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "uritools-5.0.0-py3-none-any.whl", hash = "sha256:cead3a49ba8fbca3f91857343849d506d8639718f4a2e51b62e87393b493bd6f"},
-    {file = "uritools-5.0.0.tar.gz", hash = "sha256:68180cad154062bd5b5d9ffcdd464f8de6934414b25462ae807b00b8df9345de"},
+    {file = "uritools-6.0.1-py3-none-any.whl", hash = "sha256:d9507b82206c857d2f93d8fcc84f3b05ae4174096761102be690aa76a360cc1b"},
+    {file = "uritools-6.0.1.tar.gz", hash = "sha256:2f9e9cb954e7877232b2c863f724a44a06eb98d9c7ebdd69914876e9487b94f8"},
 ]
 
 [[package]]
@@ -1284,4 +1284,4 @@ test = ["pytest (>=6.0.0)", "setuptools (>=77)"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "35e434f017c3a6f05245e8cd8cee00b321f9218fcab962ccb90452ae8173fcf3"
+content-hash = "0445a8aff696c2506c46cbe2118eb745f51054972b1826af1735ead2d6ec83a7"

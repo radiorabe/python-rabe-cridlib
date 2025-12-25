@@ -2,6 +2,8 @@
 
 # pylint: disable=line-too-long
 
+import re
+
 import pytest
 
 
@@ -38,7 +40,7 @@ def fixture_klangbecken_mock(requests_mock, example_klangbecken_data):
 def fixture_archiv_mock(requests_mock):
     """Mock null returning Archiv."""
     return requests_mock.get(
-        "https://archiv.rabe.ch/api/broadcasts/1993/03/01/131200",
+        re.compile("https://archiv.rabe.ch/api/broadcasts/1993/03/01/.*"),
         json={"data": [{"attributes": {"label": "test"}}]},
     )
 
@@ -47,7 +49,7 @@ def fixture_archiv_mock(requests_mock):
 def fixture_empty_archiv_mock(requests_mock):
     """Mock empty record from Archiv."""
     return requests_mock.get(
-        "https://archiv.rabe.ch/api/broadcasts/1993/03/01/131200",
+        re.compile("https://archiv.rabe.ch/api/broadcasts/1993/03/01/.*"),
         json={"data": []},
     )
 

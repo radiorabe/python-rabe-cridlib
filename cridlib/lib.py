@@ -198,7 +198,25 @@ class CRID:
 
         Returns
         -------
-            Start time form CRIDs media fragment.
+            Start time from CRIDs media fragment as a UTC-aware datetime, or
+            ``None`` when no fragment was present.  The timezone is always
+            ``datetime.timezone.utc`` so the value can be compared directly
+            to any other timezone-aware datetime without a ``TypeError``.
+
+        Examples
+        --------
+            Start time is UTC-aware and safe to compare with aware datetimes:
+            ```python
+            >>> from datetime import datetime, timezone
+            >>> crid = CRID("crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z")
+            >>> crid.start
+            datetime.datetime(1993, 3, 1, 13, 12, tzinfo=datetime.timezone.utc)
+            >>> crid.start.tzinfo == timezone.utc
+            True
+            >>> crid.start < datetime.now(timezone.utc)
+            True
+
+            ```
 
         """
         return self._start

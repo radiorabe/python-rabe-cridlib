@@ -123,7 +123,7 @@ Key characteristics:
 
 Maintainers (and intelligent agents) should be comfortable with:
 
-- **Python 3.11+** – typing, timezone handling (`zoneinfo` from the standard
+- **Python 3.12+** – typing, timezone handling (`zoneinfo` from the standard
   library for strategy modules, `pytz` as a third-party dependency used in
   tests and the `get()` docstring example), `datetime`, `pathlib`,
   `xml.etree.ElementTree`.
@@ -194,7 +194,7 @@ poetry shell
 
 Agents should run inside an environment that has:
 
-- Python 3.11 (or newer) with all `poetry` dev dependencies installed via
+- Python 3.12 (or newer) with all `poetry` dev dependencies installed via
   `poetry install`.
 - Prefer **`poetry run`** when executing tests, linters or scripts rather
   than manually creating or activating venvs.

@@ -26,8 +26,8 @@ def get(timestamp: datetime | None = None, fragment: str = "") -> CRID:
         >>> with patch("cridlib.strategy.past.get_session") as mock_gs:
         ...     mock_gs.return_value.get.return_value = mock_resp
         ...     crid = get(datetime(2020, 3, 1, 0, 0, tzinfo=timezone('Europe/Zurich')))
-        >>> print(f"version: {crid.version}, start: {crid.start}")
-        version: v1, start: ...
+        >>> print(f"version: {crid.version}, start: {crid.start}")  # doctest:+ELLIPSIS
+        version: v1, start: ...-...-... ...+00:00
 
         ```
 
@@ -49,7 +49,7 @@ def get(timestamp: datetime | None = None, fragment: str = "") -> CRID:
         _show = now.get_show()
     elif _ts < _now:
         _show = past.get_show(past=_ts)
-    elif _ts > _now:  # pragma: no cover
+    elif _ts > _now:
         _show = future.get_show(future=_ts)
 
     if _show:

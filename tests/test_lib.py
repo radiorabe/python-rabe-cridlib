@@ -1,6 +1,6 @@
 """Test high level cridlib API."""
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 import pytest
 from freezegun import freeze_time
@@ -16,7 +16,7 @@ import cridlib
             {
                 "version": "v1",
                 "show": "test",
-                "start": datetime(1993, 3, 1, 13, 12),
+                "start": datetime(1993, 3, 1, 13, 12, tzinfo=timezone.utc),
             },
         ),
         (
@@ -32,7 +32,7 @@ import cridlib
             {
                 "version": "v1",
                 "show": None,
-                "start": datetime(1993, 3, 1, 13, 12),
+                "start": datetime(1993, 3, 1, 13, 12, tzinfo=timezone.utc),
             },
         ),
     ],

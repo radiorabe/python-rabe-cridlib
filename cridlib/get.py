@@ -49,7 +49,7 @@ def get(timestamp: datetime | None = None, fragment: str = "") -> CRID:
         _show = now.get_show()
     elif _ts < _now:
         _show = past.get_show(past=_ts)
-    elif _ts > _now:  # pragma: no cover
+    elif _ts > _now:
         _show = future.get_show(future=_ts)
 
     if _show:

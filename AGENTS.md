@@ -109,7 +109,9 @@ Key characteristics:
 
 - External HTTP calls are fully mocked via `requests_mock` fixtures
   (`klangbecken_mock`, `archiv_mock`, `libretime_mock`, etc.), so the test
-  suite runs entirely offline.
+  suite runs entirely offline.  **Tests — including doctests — must never
+  reach production APIs; always use `requests_mock` fixtures or
+  `requests_mock.Mocker()` context managers instead.**
 
 - The `pytest` configuration in `pyproject.toml` runs linting (`--ruff`),
   type-checking (`--mypy`), doctest extraction from Markdown files
@@ -140,8 +142,9 @@ Maintainers (and intelligent agents) should be comfortable with:
   and [TV-Anytime media fragments](https://www.w3.org/TR/media-frags/).
 - Understanding of the RaBe data sources: Songticker, RAAR archive, LibreTime.
 
-Agents should be provisioned with network access when testing against live
-RaBe APIs, but current tests are fully offline.
+Tests must **never** reach production APIs — all external HTTP calls must be
+mocked.  No network access to RaBe services is required or permitted when
+running the test suite.
 
 
 ## 🤖 Agentic tasks & guidelines

@@ -16,9 +16,16 @@ def get(timestamp: datetime | None = None, fragment: str = "") -> CRID:
         You can get a CRID for a specific time.
 
         ```python
+        >>> from unittest.mock import MagicMock, patch
         >>> from datetime import datetime
         >>> from pytz import timezone
-        >>> crid = get(datetime(2020, 3, 1, 00, 00, tzinfo=timezone('Europe/Zurich')))
+        >>> mock_resp = MagicMock()
+        >>> mock_show_data = {"data": [{"attributes": {"label": "Klangbecken"}}]}
+        >>> mock_resp.json.return_value = mock_show_data
+        >>> # 2020-03-01 is in the past; patch the archive strategy to stay offline
+        >>> with patch("cridlib.strategy.past.get_session") as mock_gs:
+        ...     mock_gs.return_value.get.return_value = mock_resp
+        ...     crid = get(datetime(2020, 3, 1, 0, 0, tzinfo=timezone('Europe/Zurich')))
         >>> print(f"version: {crid.version}, start: {crid.start}")
         version: v1, start: ...
 

@@ -12,7 +12,7 @@ __LIBRETIME_INFOV2_URL = (
 )
 
 
-def get_show(future: datetime) -> str:  # pragma: no cover
+def get_show(future: datetime) -> str:
     """Return the slug for a show from LibreTime if it is in the next 7 days.
 
     Only returns a show for the next seven days because everything futher than

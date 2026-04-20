@@ -1,6 +1,6 @@
 """Test high level cridlib API."""
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 import pytest
 from freezegun import freeze_time
@@ -16,7 +16,7 @@ import cridlib
             {
                 "version": "v1",
                 "show": "test",
-                "start": datetime(1993, 3, 1, 13, 12),
+                "start": datetime(1993, 3, 1, 13, 12, tzinfo=timezone.utc),
             },
         ),
         (
@@ -32,7 +32,7 @@ import cridlib
             {
                 "version": "v1",
                 "show": None,
-                "start": datetime(1993, 3, 1, 13, 12),
+                "start": datetime(1993, 3, 1, 13, 12, tzinfo=timezone.utc),
             },
         ),
     ],
@@ -44,6 +44,21 @@ def test_crid_roundtrip(crid_str, expected):
     assert crid.version == expected["version"]
     assert crid.show == expected["show"]
     assert crid.start == expected["start"]
+
+
+def test_start_is_utc_aware():
+    """Test that start is a UTC-aware datetime.
+
+    The ``Z`` in the clock fragment encodes UTC.  Before the tzinfo fix
+    ``crid.start`` was naive, so comparing it to any timezone-aware
+    datetime would raise a ``TypeError``.  Now it carries
+    ``timezone.utc`` and comparisons work as expected.
+    """
+    crid = cridlib.lib.CRID("crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z")
+    assert crid.start is not None
+    assert crid.start.tzinfo is timezone.utc
+    # Direct comparison with another UTC-aware datetime must not raise TypeError
+    assert crid.start < datetime.now(timezone.utc)
 
 
 def test_crid_scheme_mismatch():

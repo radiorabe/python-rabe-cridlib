@@ -16,13 +16,16 @@ def test_get_now(klangbecken_mock):  # noqa: ARG001
 
 def test_get_past(archiv_mock):  # noqa: ARG001
     """Test meth:`get` for past shows."""
+    ts = datetime(1993, 3, 1, 13, 12, 0, tzinfo=timezone.utc)
     with freeze_time("1993-03-02 00:00:00 UTC"):
-        crid = cridlib.get(
-            timestamp=datetime(1993, 3, 1, 13, 12, 00, tzinfo=timezone.utc),
-        )
+        crid = cridlib.get(timestamp=ts)
     assert crid.version == "v1"
     assert crid.show == "test"
     assert str(crid) == "crid://rabe.ch/v1/test#t=clock=19930301T131200.00Z"
+    # start is UTC-aware; it can be compared directly to the original timestamp
+    assert crid.start is not None
+    assert crid.start.tzinfo is timezone.utc
+    assert crid.start == ts
 
     # show with additional local args in fragments
     with freeze_time("1993-03-02 00:00:00 UTC"):

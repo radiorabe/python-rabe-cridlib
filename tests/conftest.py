@@ -1,4 +1,4 @@
-"""Configureation for pytest."""
+"""Configuration for pytest."""
 
 # pylint: disable=line-too-long
 
